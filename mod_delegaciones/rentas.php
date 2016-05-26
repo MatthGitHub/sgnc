@@ -4,6 +4,12 @@ if($_SESSION["logeado"] != "SI"){
 	header ("Location: index.php");
 	exit;
 }
+$link = mysqli_connect($dbhost, $dbusername, $dbuserpass);
+mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
+
+$query = mysqli_query($link,"SELECT * FROM escribanos") or die ('No hay delegaciones');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -44,8 +50,8 @@ if($_SESSION["logeado"] != "SI"){
 					  </div>
 					  <div class="navbar-collapse collapse">
 					    <ul class="nav nav-tabs">
-					      <li class="active"><a href="inicio.php">Inicio</a></li>
-								<li><a href="grilla_escribanos.php?deleg=rpi"> RPI</a></li>
+					      <li><a href="inicio.php">Inicio</a></li>
+								<li class ="active"><a href="#"> RPI </a></li>
 								<li><a href=""> Catastro </a></li>
 								<li><a href=""> Rentas </a></li>
 								<li><a href=""> Municipalidad </a></li>
@@ -67,16 +73,12 @@ if($_SESSION["logeado"] != "SI"){
 					</div>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Sistema de Gestoria Notarial</h1>
-        <p>
-			<a class="btn btn-lg btn-primary" href="usuarios.php" role="button">Gestion de Usuarios &raquo;</a>
-        </p>
-        <p>
-			<a class="btn btn-lg btn-primary" href="form_cambiar_clave.php" role="button">Cambiar mi clave &raquo;</a>
-        </p>
-		<p>
-			<a class="btn btn-lg btn-primary" href="escribanos.php" role="button"> Escribanos &raquo;</a>
-        </p>
+        <h2>Registro de la propiedad de inmuebles</h2>
+					<ul class="nav nav-tabs">
+						<?php while($escribanos= mysqli_fetch_array($query)){ ?>
+						<li><a href="inicio.php"><button type="button" class="btn btn-warning"><?php echo $escribanos['nroRegistro']; ?></button></a></li>
+						<?php } ?>
+					</ul>
       </div>
 
     </div> <!-- /container -->
