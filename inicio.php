@@ -45,12 +45,12 @@ if($_SESSION["logeado"] != "SI"){
 					  <div class="navbar-collapse collapse">
 					    <ul class="nav nav-tabs">
 					      <li class="active"><a href="inicio.php">Inicio</a></li>
-								<li><a href="grilla_escribanos.php?deleg=rpi"> RPI</a></li>
-								<li><a href=""> Catastro </a></li>
-								<li><a href=""> Rentas </a></li>
-								<li><a href=""> Municipalidad </a></li>
-								<li><a href=""> Aguas </a></li>
-								<li><a href=""> Expensas </a></li>
+								<li><a href="grilla_escribanos.php?deleg=RPI"> RPI</a></li>
+								<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+								<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+								<li><a href="grilla_escribanos.php?deleg=Municipalidad"> Municipalidad </a></li>
+								<li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
+								<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
 					    <ul class="nav navbar-nav navbar-right">
 					       <li><a href=""> <?php echo $_SESSION["s_username"]; ?> </a></li>
 					       <li><a href="">Fecha:

@@ -51,12 +51,55 @@ $delegacion = $_GET['deleg'];
 					  <div class="navbar-collapse collapse">
 					    <ul class="nav nav-tabs">
 					      <li><a href="inicio.php">Inicio</a></li>
-								<li class ="active"><a href="#"> RPI </a></li>
-								<li><a href=""> Catastro </a></li>
-								<li><a href=""> Rentas </a></li>
-								<li><a href=""> Municipalidad </a></li>
-								<li><a href=""> Aguas </a></li>
-								<li><a href=""> Expensas </a></li>
+								<?php if($delegacion == 'RPI'){ ?>
+										<li class ="active"><a href="#"> RPI </a></li>
+										<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+										<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+										<li><a href="grilla_escribanos.php?deleg=Aguascipalidad"> Municipalidad </a></li>
+										<li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
+										<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
+								<?php }
+								if($delegacion == 'Catastro'){ ?>
+									<li><a href="grilla_escribanos.php?deleg=RPI"> RPI </a></li>
+									<li class ="active"><a href="#"> Catastro </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Municipalidad"> Municipalidad </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Expensas"> Aguas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
+								<?php }
+								if($delegacion == 'Rentas'){ ?>
+									<li><a href="grilla_escribanos.php?deleg=RPI"> RPI </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+									<li class ="active"><a href="#"> Rentas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Municipalidad"> Municipalidad </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
+								<?php }
+								if($delegacion == 'Municipalidad'){ ?>
+									<li><a href="grilla_escribanos.php?deleg=RPI"> RPI </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+									<li class ="active"><a href="#"> Municipalidad </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
+								<?php }
+								if($delegacion == 'Aguas'){ ?>
+									<li><a href="grilla_escribanos.php?deleg=RPI"> RPI </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Municipalidad"> Municipalidad </a></li>
+									<li class ="active"><a href="#"> Aguas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
+								<?php }
+								if($delegacion == 'Expensas'){ ?>
+									<li><a href="grilla_escribanos.php?deleg=RPI"> RPI </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
+									<li><a href="grilla_escribanos.php?deleg=muni"> Municipalidad </a></li>
+									<li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
+									<li class ="active"><a href="#"> Expensas </a></li>
+								<?php } ?>
+
 					    <ul class="nav navbar-nav navbar-right">
 					       <li><a href=""> <?php echo $_SESSION["s_username"]; ?> </a></li>
 					       <li><a href="">Fecha:
@@ -73,27 +116,28 @@ $delegacion = $_GET['deleg'];
 					</div>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-		if($deleg == 'rpi'){
+		<?php if($delegacion == 'RPI'){ ?>
 				<h2>Registro de la propiedad de inmuebles</h2>
-		}
-		if($deleg == 'catastro'){
+		<?php }
+		if($delegacion == 'Catastro'){ ?>
 				<h2>Catastro provincial</h2>
-		}
-		if($deleg == 'rentas'){
+		<?php }
+		if($delegacion == 'Rentas'){ ?>
 				<h2>Rentas</h2>
-		}
-		if($deleg == 'muni'){
+		<?php }
+		if($delegacion == 'Municipalidad'){ ?>
 				<h2> Municipalidad </h2>
-		}
-		if($deleg == 'aguas'){
+		<?php }
+		if($delegacion == 'Aguas'){ ?>
 				<h2> Aguas Rionegrinas</h2>
-		}
-		if($deleg == 'expensas'){
+		<?php }
+		if($delegacion == 'Expensas'){ ?>
 				<h2> Expensas </h2>
-		}
+		<?php } ?>
 					<ul class="nav nav-tabs">
+						<h4> Seleccione escribano </h4>
 						<?php while($escribanos= mysqli_fetch_array($query)){ ?>
-						<li><a href="inicio.php"><button type="button" class="btn btn-warning"><?php echo $escribanos['nroRegistro']; ?></button></a></li>
+						<li><a href="certificados.php?deleg=<?php echo $delegacion;?>&nroRegistro=<?php echo $escribanos['nroRegistro']; ?>"><button type="button" class="btn btn-warning"><?php echo $escribanos['nroRegistro']; ?></button></a></li>
 						<?php } ?>
 					</ul>
       </div>
