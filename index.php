@@ -54,7 +54,7 @@ body
                 <div class="panel-body">
                     <h5 class="text-center">
                         Ingreso al sistema</h5>
-                    <form class="form form-signup" role="form" method="post" action="entrar.php">
+                    <form class="form form-signup" role="form" method="post" action="inc/entrar.php">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
