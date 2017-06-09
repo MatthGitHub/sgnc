@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2017 a las 14:04:05
+-- Tiempo de generación: 09-06-2017 a las 17:12:42
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -31,10 +31,11 @@ CREATE TABLE `clientes` (
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `documento` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `registro` int(11) DEFAULT NULL,
   `correo` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `telefono` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `fkTipoCliente` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -47,7 +48,15 @@ CREATE TABLE `delegaciones` (
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `ubicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `observacion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `delegaciones`
+--
+
+INSERT INTO `delegaciones` (`idDelegacion`, `nombre`, `ubicacion`, `observacion`) VALUES
+(1, 'Municipalidad', 'Mitre 531', NULL),
+(2, 'Aguas / A.R.P.', 'Av. 12 de Octubre', NULL);
 
 -- --------------------------------------------------------
 
@@ -59,7 +68,7 @@ CREATE TABLE `detallesventas` (
   `fkVenta` int(11) NOT NULL,
   `fkTramite` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -70,7 +79,7 @@ CREATE TABLE `detallesventas` (
 CREATE TABLE `estadostramites` (
   `idEstadoTramite` int(11) NOT NULL,
   `descripcion` varchar(15) COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -81,7 +90,7 @@ CREATE TABLE `estadostramites` (
 CREATE TABLE `tiposclientes` (
   `idTipoCliente` int(11) NOT NULL,
   `descripcion` varchar(30) COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -95,7 +104,7 @@ CREATE TABLE `tipostramites` (
   `descripcion` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `costo` int(11) NOT NULL,
   `fkDelegacion` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -110,7 +119,7 @@ CREATE TABLE `tramites` (
   `recargo` int(11) DEFAULT NULL,
   `fkCliente` int(11) NOT NULL,
   `fkTipoTramite` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -123,7 +132,7 @@ CREATE TABLE `usuarios` (
   `nombreUsuario` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
   `clave` varchar(32) COLLATE utf8_spanish2_ci NOT NULL,
   `fkRol` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -142,7 +151,7 @@ CREATE TABLE `ventas` (
   `idVenta` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `total` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Índices para tablas volcadas
@@ -216,7 +225,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `delegaciones`
 --
 ALTER TABLE `delegaciones`
-  MODIFY `idDelegacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDelegacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `estadostramites`
 --
