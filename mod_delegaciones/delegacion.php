@@ -1,14 +1,16 @@
 <?php
 include('../inc/config.php');
-if($_SESSION["logeado"] != "SI"){
-  header ("Location: index.php");
-  exit;
-}
+include('../inc/validar.php');
 
 $idDelegacion = $_GET['idDelegacion'];
 // Conectar a la base de datos
 $link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
 mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
+$sql = "SELECT nombre FROM delegaciones WHERE idDelegacion = $idDelegacion";
+$stmt = mysqli_query($link,$sql);
+$nombre = mysqli_fetch_row(0,'nombre');
+
+
 $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apellido AS cliente,tt.nombre AS tramite,observacion
                               FROM tramites t JOIN tipostramites tt ON t.fkTipoTramite = tt.idTipoTramite
                               JOIN clientes c ON c.idCliente = t.fkCliente
@@ -41,6 +43,7 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
 	</style>
   <body>
     <br>
+    <div class="container">
         <?php include("../inc/menu.php"); ?>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -74,9 +77,5 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
 
     </div> <!-- /container -->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

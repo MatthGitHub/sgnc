@@ -1,9 +1,7 @@
 <?php
 include('config.php');
-if($_SESSION["logeado"] != "SI"){
-	header ("Location: ../index.php");
-	exit;
-}
+include('validar.php');
+
 $link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
 mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
 $sql = "SELECT idDelegacion,nombre FROM delegaciones";
@@ -42,6 +40,9 @@ $stmt = mysqli_query($link,$sql);
 	<div class="jumbotron">
 		<h2><img src="../images/menu.png" alt="Getionate" align="middle" style="margin:0px 0px 0px 0px" height="32" width="32"> Sistema de Gestion </h2>
 	<div class="row">
+		<p>
+			<a class="btn btn-lg btn-info" href="#" role="button">Nuevo tramite</a>
+		</p>
 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#">Delegaciones</a></li>
 			<?php while($delegacion = mysqli_fetch_array($stmt)){ ?>
@@ -49,6 +50,7 @@ $stmt = mysqli_query($link,$sql);
 			<?php } ?>
 		</ul>
 	</div>
+
 	</div>
 	<div class="panel-footer">
 	<p class="text-center">Matias Benditti - matiasbenditti@gmail.com</p>

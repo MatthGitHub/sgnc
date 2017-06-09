@@ -24,8 +24,8 @@
       <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="usuarios.php">Listar</a></li>
-              <li><a href="registrarse.php">Nuevo</a></li>
+            <li><a href="#">Listar</a></li>
+              <li><a href="#">Nuevo</a></li>
             </ul>
           </li>
     <?php
@@ -34,15 +34,15 @@
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Delegaciones<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="usuarios.php">Listar</a></li>
-            <li><a href="registrarse.php">Nuevo</a></li>
+          <li><a href="#">Listar</a></li>
+            <li><a href="#">Nuevo</a></li>
           </ul>
         </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="usuarios.php">Listar</a></li>
-                <li><a href="registrarse.php">Nuevo</a></li>
+              <li><a href="../mod_clientes/clientes.php">Listar</a></li>
+                <li><a href="#">Nuevo</a></li>
               </ul>
             </li>
     </ul>
