@@ -1,3 +1,9 @@
+<!-- Bootstrap -->
+<script src="../js/bootstrap.min.js"></script>
+<link href="../css/font-awesome.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+
+
 <!-- Static navbar -->
 <div class="navbar navbar-default" role="navigation">
 <div class="container-fluid">
@@ -11,24 +17,34 @@
     <a class="navbar-brand" href="#">Bienvenido </a>
   </div>
   <div class="navbar-collapse collapse">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="inicio.php">Inicio</a></li>
-      <li><a href="grilla_escribanos.php?deleg=RPI"> RPI</a></li>
-      <li><a href="grilla_escribanos.php?deleg=Catastro"> Catastro </a></li>
-      <li><a href="grilla_escribanos.php?deleg=Rentas"> Rentas </a></li>
-      <li><a href="grilla_escribanos.php?deleg=Municipalidad"> Municipalidad </a></li>
-      <li><a href="grilla_escribanos.php?deleg=Aguas"> Aguas </a></li>
-      <li><a href="grilla_escribanos.php?deleg=Expensas"> Expensas </a></li>
-    <ul class="nav navbar-nav navbar-right">
-       <li><a href=""> <?php echo $_SESSION["s_username"]; ?> </a></li>
-       <li><a href="">Fecha:
-        <?php
-        // Establecer la zona horaria predeterminada a usar. Disponible desde PHP 5.1
-        date_default_timezone_set('UTC');
-        //Imprimimos la fecha actual dandole un formato
-        echo date("d / m / Y");
-        ?></a></li>
-      <li><a href="cerrar.php">Salir</a></li>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="../inc/inicio.php">Inicio</a></li>
+    <?php
+    if($_SESSION["permiso"] == 1) { ?>
+      <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="usuarios.php">Listar</a></li>
+              <li><a href="registrarse.php">Nuevo</a></li>
+            </ul>
+          </li>
+    <?php
+    }
+    ?>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Delegaciones<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="usuarios.php">Listar</a></li>
+            <li><a href="registrarse.php">Nuevo</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="usuarios.php">Listar</a></li>
+                <li><a href="registrarse.php">Nuevo</a></li>
+              </ul>
+            </li>
     </ul>
   </div><!--/.nav-collapse -->
 </div><!--/.container-fluid -->

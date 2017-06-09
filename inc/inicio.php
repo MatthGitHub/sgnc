@@ -1,9 +1,14 @@
 <?php
 include('config.php');
 if($_SESSION["logeado"] != "SI"){
-	header ("Location: index.php");
+	header ("Location: ../index.php");
 	exit;
 }
+$link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
+mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
+$sql = "SELECT idDelegacion,nombre FROM delegaciones";
+$stmt = mysqli_query($link,$sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +19,9 @@ if($_SESSION["logeado"] != "SI"){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema Gestor Bariloche</title>
 
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.css" rel="stylesheet">
+		<!-- Bootstrap -->
+		<script src="../js/jquery-1.12.3.js"></script>
+		<link href="../css/bootstrap.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,24 +30,29 @@ if($_SESSION["logeado"] != "SI"){
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <style type="text/css">
-  body{background: #000;}
-  </style>
+	<style type="text/css">
+	body{background: #310000;}
+	</style>
   <body>
     <br>
-        <div class="container">
-					<?php include "menu.php"; ?>
-      <div class="jumbotron">
-				<ul class="nav nav-tabs">
-				  <li class="active"><a href="#">Home</a></li>
-				  <li><a href="#">Menu 1</a></li>
-				  <li><a href="#">Menu 2</a></li>
-				  <li><a href="#">Menu 3</a></li>
-				</ul>
-      </div>
-
-    </div> <!-- /container -->
-
-    	<p align="center"> by M. Benditti. </p>
+		<div class="container">
+<!-- Static navbar -->
+<?php include "menu.php"; ?>
+<!-- Main component for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<h2><img src="../images/menu.png" alt="Getionate" align="middle" style="margin:0px 0px 0px 0px" height="32" width="32"> Sistema de Gestion </h2>
+	<div class="row">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#">Delegaciones</a></li>
+			<?php while($delegacion = mysqli_fetch_array($stmt)){ ?>
+		  <li><a href="../mod_delegaciones/delegacion.php?idDelegacion=<?php echo $delegacion['idDelegacion']; ?>"><?php echo $delegacion['nombre']; ?></a></li>
+			<?php } ?>
+		</ul>
+	</div>
+	</div>
+	<div class="panel-footer">
+	<p class="text-center">Matias Benditti - matiasbenditti@gmail.com</p>
+</div>
+</div> <!-- /container -->
   </body>
 </html>
