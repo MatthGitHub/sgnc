@@ -41,7 +41,7 @@ $stmt = mysqli_query($link,$sql);
 		<h2><img src="../images/menu.png" alt="Getionate" align="middle" style="margin:0px 0px 0px 0px" height="32" width="32"> Sistema de Gestion </h2>
 	<div class="row">
 		<p>
-			<a class="btn btn-lg btn-info" href="#" role="button">Nuevo tramite</a>
+			<a class="btn btn-lg btn-info" href="../mod_tramites/frm_nuevo_tramite.php" role="button">Nuevo tramite</a>
 		</p>
 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#">Delegaciones</a></li>

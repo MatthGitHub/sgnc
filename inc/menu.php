@@ -46,6 +46,19 @@
               </ul>
             </li>
     </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+			<li><a href="../mod_usuarios/form_cambiar_clave.php"><i class="fa fa-key fa-fw"></i> Cambiar clave </a></li>
+			<li><a><i class="fa fa-user-circle-o fa-fw"></i> <?php echo $_SESSION['s_nombre_usuario']; ?> </a></li>
+			<li><a><i class="fa fa-calendar-o fa-fw"></i>
+			<?php
+			// Establecer la zona horaria predeterminada a usar. Disponible desde PHP 5.1
+			date_default_timezone_set('UTC');
+			//Imprimimos la fecha actual dandole un formato
+			echo date("d / m / Y");
+			?></a></li>
+			<li><a href="cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
+	  </ul>
   </div><!--/.nav-collapse -->
 </div><!--/.container-fluid -->
 </div>

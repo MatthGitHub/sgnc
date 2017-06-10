@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../inc/config.php');
     // Primero comprobamos que ning�n campo est� vac�o y que todos los campos existan.
     if(isset($_POST['claveA']) && !empty($_POST['claveA']) &&
     isset($_POST['claveN']) && !empty($_POST['claveN']) &&
