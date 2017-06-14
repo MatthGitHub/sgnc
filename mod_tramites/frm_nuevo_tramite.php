@@ -1,6 +1,17 @@
 <?php
 include('../inc/config.php');
 include('../inc/validar.php');
+
+$link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
+mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
+
+$sql = "SELECT * FROM tipostramites";
+$tipostramites = mysqli_query($link,$sql);
+
+$sql = "SELECT * FROM clientes";
+$clientes = mysqli_query($link,$sql);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +22,7 @@ include('../inc/validar.php');
     <title>Nuevo tramite</title>
 
     <!-- Bootstrap -->
+		<script src="../js/jquery-1.12.3.js"></script>
     <link href="../css/bootstrap.css" rel="stylesheet">
 
 
@@ -32,15 +44,31 @@ include('../inc/validar.php');
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h5 class="text-center">
-                        Nuevo tramite</h5>
+                    <h5 class="text-center">Nuevo tramite</h5>
                     <form class="form form-signup" role="form">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input name="nombre" type="text" id="nombre" class="form-control" placeholder="Nombre" />
-                        </div>
-                    </div>
+
+                      <div class="form-group">
+                          <span class="input-group-addon"><i class="fa fa-id-card-o fa-fw"></i> Tipo </span>
+                          <div class="col-xs-15 selectContainer">
+                              <select class="form-control" id="tipoDoc" name="tipoDoc">
+                                  <?php while($tipo = mysqli_fetch_array($tipostramites)){ ?>
+                                  <option value=<?php echo $tipo['idTipoTramite']; ?>><?php echo $tipo['nombre']; ?></option>
+                                  <?php } ?>
+                              </select>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <span class="input-group-addon"><i class="fa fa-id-card-o fa-fw"></i> Cliente </span>
+                          <div class="col-xs-15 selectContainer">
+                              <select class="form-control" id="tipoDoc" name="tipoDoc">
+                                  <?php while($cliente = mysqli_fetch_array($clientes)){ ?>
+                                  <option value=<?php echo $cliente['idCliente']; ?>><?php echo $cliente['nombre']; ?></option>
+                                  <?php } ?>
+                              </select>
+                          </div>
+                      </div>
+
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-home"></span>
@@ -55,13 +83,7 @@ include('../inc/validar.php');
                             <input name="telefono" type="text" id="telefono" class="form-control" placeholder="Telefono" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
-                            </span>
-                            <input name="email" type="text" id="email" class="form-control" placeholder="Correo Electronico" />
-                        </div>
-                    </div>
+
                 </div>
                 <input type="submit" name="Submit" value="Registrar"  class="btn btn-sm btn-primary btn-block">
  </form>
@@ -113,10 +135,5 @@ echo "";
       </div>
 
     </div> <!-- /container -->
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
