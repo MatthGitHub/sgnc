@@ -8,7 +8,8 @@ $link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
 mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
 $sql = "SELECT nombre FROM delegaciones WHERE idDelegacion = $idDelegacion";
 $stmt = mysqli_query($link,$sql);
-$nombre = mysqli_fetch_row(0,'nombre');
+$nombre = mysqli_fetch_array($stmt);
+$nombre = $nombre['nombre'];
 
 
 $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apellido AS cliente,tt.nombre AS tramite,observacion
@@ -25,18 +26,12 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lotes</title>
+    <title> Delegaciones </title>
 
     <!-- Bootstrap -->
 		<script src="../js/jquery-1.12.3.js"></script>
 		<link href="../css/bootstrap.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
   </head>
   <style type="text/css">
 	body{background: #310000;}
@@ -47,7 +42,7 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
         <?php include("../inc/menu.php"); ?>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-<div class="row">
+<div class="row"><h3> <?php echo $nombre; ?></h3>
               <table class="table table-hover">
                 	<thead>
                     	<th> Numero de tramite </th>

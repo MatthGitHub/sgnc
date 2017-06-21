@@ -24,7 +24,7 @@ exit();
 $query = mysqli_query($link,"SELECT nombreUsuario,clave,fkRol FROM usuarios WHERE nombreUsuario = '$username'") or die(mysqli_error($link));
 $row = mysqli_fetch_array($query);
 $username2 = $row['nombreUsuario'];
-$_SESSION["s_username"] = $row['nombreUsuario'];
+$_SESSION["s_nombre_usuario"] = $row['nombreUsuario'];
 
 $_SESSION["logeado"] = "SI";
 $_SESSION["permiso"] = $row['fkRol'];

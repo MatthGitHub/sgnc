@@ -42,7 +42,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Clientes<span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="../mod_clientes/clientes.php">Listar</a></li>
-                <li><a href="#">Nuevo</a></li>
+                <li><a href="../mod_clientes/frm_nuevo_cliente.php">Nuevo</a></li>
               </ul>
             </li>
     </ul>

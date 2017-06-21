@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2017 a las 17:12:42
+-- Tiempo de generación: 21-06-2017 a las 17:37:44
 -- Versión del servidor: 5.7.14
 -- Versión de PHP: 7.0.10
 
@@ -30,12 +30,21 @@ CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
   `apellido` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `documento` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
+  `documento` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `registro` int(11) DEFAULT NULL,
   `correo` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `telefono` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `fkTipoCliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`idCliente`, `nombre`, `apellido`, `documento`, `registro`, `correo`, `telefono`, `fkTipoCliente`) VALUES
+(1, 'Matias', 'Benditti', '35593648', NULL, 'matiasbenditti@hotmail.com', '2944655052', 1),
+(2, 'Ramon', 'Diaz', '123456789', 137, NULL, NULL, 2),
+(3, 'Matute', 'Morales', '2358974563', 568, 'matute@morales.es', '29446589987', 1);
 
 -- --------------------------------------------------------
 
@@ -92,6 +101,14 @@ CREATE TABLE `tiposclientes` (
   `descripcion` varchar(30) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `tiposclientes`
+--
+
+INSERT INTO `tiposclientes` (`idTipoCliente`, `descripcion`) VALUES
+(1, 'Particular'),
+(2, 'Escribano');
+
 -- --------------------------------------------------------
 
 --
@@ -105,6 +122,14 @@ CREATE TABLE `tipostramites` (
   `costo` int(11) NOT NULL,
   `fkDelegacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipostramites`
+--
+
+INSERT INTO `tipostramites` (`idTipoTramite`, `nombre`, `descripcion`, `costo`, `fkDelegacion`) VALUES
+(1, 'Certificado catastral', 'RPI', 90, 1),
+(2, 'Certificado libre deuda', 'Municipalidad', 120, 1);
 
 -- --------------------------------------------------------
 
@@ -120,6 +145,13 @@ CREATE TABLE `tramites` (
   `fkCliente` int(11) NOT NULL,
   `fkTipoTramite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tramites`
+--
+
+INSERT INTO `tramites` (`idTramite`, `fecha`, `observacion`, `recargo`, `fkCliente`, `fkTipoTramite`) VALUES
+(1, '2017-06-21', 'Prueba', 75, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -220,7 +252,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `delegaciones`
 --
@@ -235,17 +267,17 @@ ALTER TABLE `estadostramites`
 -- AUTO_INCREMENT de la tabla `tiposclientes`
 --
 ALTER TABLE `tiposclientes`
-  MODIFY `idTipoCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTipoCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tipostramites`
 --
 ALTER TABLE `tipostramites`
-  MODIFY `idTipoTramite` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTipoTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tramites`
 --
 ALTER TABLE `tramites`
-  MODIFY `idTramite` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
