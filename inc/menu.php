@@ -22,20 +22,22 @@
     <?php
     if($_SESSION["permiso"] == 1) { ?>
       <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Usuarios<span class="caret"></span></a>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Tramites<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Listar</a></li>
-              <li><a href="#">Nuevo</a></li>
-            </ul>
-          </li>
+            <li><a href="#">Listar tramites</a></li>
+            <li><a href="../mod_tramites/frm_nuevo_tramite.php">Nuevo tramite</a></li>
+            <li><a href="../mod_tipos_tramite/tipos_tramite.php">Listar tipos de tramite</a></li>
+            <li><a href="../mod_tipos_tramite/frm_nuevo_tipo_tramite.php">Nuevo tipo de tramite</a></li>
+          </ul>
+      </li>
     <?php
     }
     ?>
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Delegaciones<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Listar</a></li>
-            <li><a href="#">Nuevo</a></li>
+          <li><a href="../mod_delegaciones/delegaciones.php">Listar</a></li>
+            <li><a href="../mod_delegaciones/frm_nueva_delegacion.php">Nueva</a></li>
           </ul>
         </li>
         <li class="dropdown">

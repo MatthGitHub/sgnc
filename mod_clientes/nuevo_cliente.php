@@ -11,7 +11,10 @@ if((!empty($_POST['nombre']))&&(!empty($_POST['apellido']))&&(!empty($_POST['tip
   $telefono = $_POST['telefono'];
   $registro = $_POST['registro'];
 
-
+  if((!empty($_POST['registro']))&&($tipo == 1)){
+    header("Location: frm_nuevo_cliente.php?errortipo");
+    exit();
+  }
 
 
 
@@ -20,7 +23,11 @@ if((!empty($_POST['nombre']))&&(!empty($_POST['apellido']))&&(!empty($_POST['tip
   $link = mysqli_connect ($dbhost, $dbusername, $dbuserpass);
   mysqli_select_db($link,$dbname) or die('No se puede seleccionar la base de datos');
 
-  $sql = "INSERT INTO clientes (nombre,apellido,documento,registro,correo,telefono,fkTipoCliente) VALUES ('$nombre','$apellido','$documento',$registro,'$correo','$telefono',$tipo)";
+  if(!empty($_POST['registro'])){
+    $sql = "INSERT INTO clientes (nombre,apellido,documento,registro,correo,telefono,fkTipoCliente) VALUES ('$nombre','$apellido','$documento',$registro,'$correo','$telefono',$tipo)";
+  }else{
+    $sql = "INSERT INTO clientes (nombre,apellido,documento,correo,telefono,fkTipoCliente) VALUES ('$nombre','$apellido','$documento','$correo','$telefono',$tipo)";
+  }
   $myError = mysqli_query($link, $sql);
 
 

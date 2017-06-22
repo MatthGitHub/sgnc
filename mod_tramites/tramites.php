@@ -12,7 +12,7 @@ $nombre = mysqli_fetch_array($stmt);
 $nombre = $nombre['nombre'];
 
 
-$query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apellido AS cliente,tt.nombre AS tramite,observacion
+$query = mysqli_query($link,"SELECT idTramite,fecha,recargo,CONCAT(c.nombre,  ' ', c.apellido) AS cliente,tt.nombre AS tramite,observacion
                               FROM tramites t JOIN tipostramites tt ON t.fkTipoTramite = tt.idTipoTramite
                               JOIN clientes c ON c.idCliente = t.fkCliente
                               WHERE tt.fkDelegacion = $idDelegacion") or die(mysqli_error($link));
@@ -26,12 +26,12 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Delegaciones </title>
+    <title> <?php echo $nombre; ?> </title>
 
     <!-- Bootstrap -->
 		<script src="../js/jquery-1.12.3.js"></script>
 		<link href="../css/bootstrap.css" rel="stylesheet">
-    
+
   </head>
   <style type="text/css">
 	body{background: #310000;}
@@ -51,13 +51,13 @@ $query = mysqli_query($link,"SELECT idTramite,fecha,recargo,c.nombre+' '+c.apell
           						<th> Cliente </th>
                       <th> Tramite </th>
                       <th> Observacion </th>
-                      <th> Detalle </th>
                     </thead>
                     <tbody>
                     	<?php while($lotes = mysqli_fetch_array($query)){ ?>
                         <tr class="success">
                             <td> <?php echo $lotes['idTramite']; ?> </td>
                             <td> <?php echo $lotes['fecha']; ?> </td>
+                            <td> <?php echo $lotes['recargo']; ?> </td>
 	                          <td> <?php echo $lotes['cliente']; ?> </td>
                             <td> <?php echo $lotes['tramite']; ?> </td>
                             <td> <?php echo $lotes['observacion']; ?> </td>

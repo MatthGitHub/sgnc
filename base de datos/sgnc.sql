@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2017 a las 17:37:44
--- Versión del servidor: 5.7.14
--- Versión de PHP: 7.0.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 22-06-2017 a las 04:52:32
+-- Versión del servidor: 5.6.35
+-- Versión de PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -37,15 +37,6 @@ CREATE TABLE `clientes` (
   `fkTipoCliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`idCliente`, `nombre`, `apellido`, `documento`, `registro`, `correo`, `telefono`, `fkTipoCliente`) VALUES
-(1, 'Matias', 'Benditti', '35593648', NULL, 'matiasbenditti@hotmail.com', '2944655052', 1),
-(2, 'Ramon', 'Diaz', '123456789', 137, NULL, NULL, 2),
-(3, 'Matute', 'Morales', '2358974563', 568, 'matute@morales.es', '29446589987', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -58,14 +49,6 @@ CREATE TABLE `delegaciones` (
   `ubicacion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `observacion` varchar(300) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `delegaciones`
---
-
-INSERT INTO `delegaciones` (`idDelegacion`, `nombre`, `ubicacion`, `observacion`) VALUES
-(1, 'Municipalidad', 'Mitre 531', NULL),
-(2, 'Aguas / A.R.P.', 'Av. 12 de Octubre', NULL);
 
 -- --------------------------------------------------------
 
@@ -123,14 +106,6 @@ CREATE TABLE `tipostramites` (
   `fkDelegacion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
---
--- Volcado de datos para la tabla `tipostramites`
---
-
-INSERT INTO `tipostramites` (`idTipoTramite`, `nombre`, `descripcion`, `costo`, `fkDelegacion`) VALUES
-(1, 'Certificado catastral', 'RPI', 90, 1),
-(2, 'Certificado libre deuda', 'Municipalidad', 120, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -145,13 +120,6 @@ CREATE TABLE `tramites` (
   `fkCliente` int(11) NOT NULL,
   `fkTipoTramite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `tramites`
---
-
-INSERT INTO `tramites` (`idTramite`, `fecha`, `observacion`, `recargo`, `fkCliente`, `fkTipoTramite`) VALUES
-(1, '2017-06-21', 'Prueba', 75, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -206,7 +174,8 @@ ALTER TABLE `delegaciones`
 -- Indices de la tabla `detallesventas`
 --
 ALTER TABLE `detallesventas`
-  ADD PRIMARY KEY (`fkVenta`,`fkTramite`);
+  ADD PRIMARY KEY (`fkVenta`,`fkTramite`),
+  ADD KEY `fkTramite` (`fkTramite`);
 
 --
 -- Indices de la tabla `estadostramites`
@@ -224,13 +193,16 @@ ALTER TABLE `tiposclientes`
 -- Indices de la tabla `tipostramites`
 --
 ALTER TABLE `tipostramites`
-  ADD PRIMARY KEY (`idTipoTramite`);
+  ADD PRIMARY KEY (`idTipoTramite`),
+  ADD KEY `fkDelegacion` (`fkDelegacion`);
 
 --
 -- Indices de la tabla `tramites`
 --
 ALTER TABLE `tramites`
-  ADD PRIMARY KEY (`idTramite`);
+  ADD PRIMARY KEY (`idTramite`),
+  ADD KEY `fkCliente` (`fkCliente`),
+  ADD KEY `fkTipoTramite` (`fkTipoTramite`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -252,12 +224,12 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `delegaciones`
 --
 ALTER TABLE `delegaciones`
-  MODIFY `idDelegacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idDelegacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `estadostramites`
 --
@@ -272,12 +244,12 @@ ALTER TABLE `tiposclientes`
 -- AUTO_INCREMENT de la tabla `tipostramites`
 --
 ALTER TABLE `tipostramites`
-  MODIFY `idTipoTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idTipoTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tramites`
 --
 ALTER TABLE `tramites`
-  MODIFY `idTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idTramite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
@@ -288,6 +260,36 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `ventas`
   MODIFY `idVenta` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`fkTipoCliente`) REFERENCES `tiposclientes` (`idTipoCliente`);
+
+--
+-- Filtros para la tabla `detallesventas`
+--
+ALTER TABLE `detallesventas`
+  ADD CONSTRAINT `detallesventas_ibfk_1` FOREIGN KEY (`fkVenta`) REFERENCES `ventas` (`idVenta`),
+  ADD CONSTRAINT `detallesventas_ibfk_2` FOREIGN KEY (`fkTramite`) REFERENCES `tramites` (`idTramite`);
+
+--
+-- Filtros para la tabla `tipostramites`
+--
+ALTER TABLE `tipostramites`
+  ADD CONSTRAINT `tipostramites_ibfk_1` FOREIGN KEY (`fkDelegacion`) REFERENCES `delegaciones` (`idDelegacion`);
+
+--
+-- Filtros para la tabla `tramites`
+--
+ALTER TABLE `tramites`
+  ADD CONSTRAINT `tramites_ibfk_1` FOREIGN KEY (`fkCliente`) REFERENCES `clientes` (`idCliente`),
+  ADD CONSTRAINT `tramites_ibfk_2` FOREIGN KEY (`fkTipoTramite`) REFERENCES `tipostramites` (`idTipoTramite`);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

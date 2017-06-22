@@ -46,7 +46,7 @@ $stmt = mysqli_query($link,$sql);
 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#">Delegaciones</a></li>
 			<?php while($delegacion = mysqli_fetch_array($stmt)){ ?>
-		  <li><a href="../mod_delegaciones/delegacion.php?idDelegacion=<?php echo $delegacion['idDelegacion']; ?>"><?php echo $delegacion['nombre']; ?></a></li>
+		  <li><a href="../mod_tramites/tramites.php?idDelegacion=<?php echo $delegacion['idDelegacion']; ?>"><?php echo $delegacion['nombre']; ?></a></li>
 			<?php } ?>
 		</ul>
 	</div>
